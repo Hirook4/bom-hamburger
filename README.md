@@ -1,3 +1,10 @@
+# Prints
+
+<a href="https://github.com/Hirook4" target="_blank"><img src="assets/prints/print01.png" width="20%"></a>
+<a href="https://github.com/Hirook4" target="_blank"><img src="assets/prints/print02.png" width="20%"></a>
+<a href="https://github.com/Hirook4" target="_blank"><img src="assets/prints/print03.png" width="20%"></a>
+<a href="https://github.com/Hirook4" target="_blank"><img src="assets/prints/print04.png" width="20%"></a>
+
 
 # bom_hamburguer
 We're with "BOM HAMBURGUER" and would like to create a software solution for placing and managing orders.
@@ -6,14 +13,14 @@ You are responsible for developing a mobile application (Android/iOS). The busin
 
 **The user can choose three sandwich options:**
 
-X Burger – $ 5,00
-X Egg - $ 4,50
-X Bacon - $ 7,00
+1. X Burger – $ 5,00
+2. X Egg - $ 4,50
+3. X Bacon - $ 7,00
  
 **User can also add Extras:**
 
-Fries -  $ 2,00
-Soft Drink - $ 2,50
+1. Fries -  $ 2,00
+2. Soft Drink - $ 2,50
 
 **Rules:**
 
@@ -39,7 +46,7 @@ Soft Drink - $ 2,50
 - The Project needs to be in **Flutter**. - You **don’t need to build an API**, you can use the local storage or SQL lite.
 
 - Please upload the **source code to a GitHub repository**.
-- 
+
 ## Anotações
 - definindo temas e imagens que serão usadas. Itens da loja inseridos em um arquivo JSON.
 - criação da tela de Login (sem autenticação).

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class Cart extends StatelessWidget {
   final List<Map<String, dynamic>> cart;
-  Cart({super.key, required this.cart});
+  const Cart({super.key, required this.cart});
 
   double calcValues(List<Map<String, dynamic>> cart) {
     return cart.fold(0.0, (sum, item) => sum + (item['price'] as double));
@@ -37,6 +37,7 @@ class Cart extends StatelessWidget {
     return Scaffold(
       backgroundColor: ColorTheme.primaryColor,
       appBar: AppBar(
+        iconTheme: IconThemeData(color: ColorTheme.primaryColor),
         title: const Text(
           "Seu Carrinho 🛒",
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
@@ -123,7 +124,6 @@ class Cart extends StatelessWidget {
                           ),
                         ],
                       ),
-
                       Row(
                         children: [
                           Text(

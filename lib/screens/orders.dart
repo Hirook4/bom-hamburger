@@ -7,11 +7,37 @@ class Orders extends StatelessWidget {
 
   const Orders({super.key, required this.orders, required this.name});
 
+  /* Verifica os tipos existentes no carrinho e calcula o desconto,
+   provavelmente não é a melhor forma de mostrar o desconto novamente,
+    ja que o calculo foi feito no carrinho...*/
+  double calcValues(List<Map<String, dynamic>> cart) {
+    return cart.fold(0.0, (sum, item) => sum + (item['price'] as double));
+  }
+
+  double calcDiscount(List<Map<String, dynamic>> cart) {
+    final types = cart.map((item) => item['type'] as String).toSet();
+
+    bool hasBurger = types.contains('burger');
+    bool hasExtra = types.contains('extra');
+    bool hasDrink = types.contains('drink');
+
+    if (hasBurger && hasExtra && hasDrink) {
+      return calcValues(cart) * 0.20;
+    } else if (hasBurger && hasDrink) {
+      return calcValues(cart) * 0.15;
+    } else if (hasBurger && hasExtra) {
+      return calcValues(cart) * 0.10;
+    } else {
+      return calcValues(cart) * 0.0;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorTheme.primaryColor,
       appBar: AppBar(
+        iconTheme: IconThemeData(color: ColorTheme.primaryColor),
         title: Text(
           "Pedidos 📋",
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
@@ -33,10 +59,10 @@ class Orders extends StatelessWidget {
               itemCount: orders.length,
               itemBuilder: (context, index) {
                 final order = orders[index];
-                final total = order.fold(
-                  0.0,
-                  (sum, item) => sum + (item['price'] as double),
-                );
+                final total = calcValues(order);
+                final discount = calcDiscount(order);
+                final finalTotal = total - discount;
+
                 return Card(
                   child: ListTile(
                     title: Text(
@@ -54,7 +80,15 @@ class Orders extends StatelessWidget {
                         }),
                         SizedBox(height: 8),
                         Text(
-                          "Valor Final: \$${total.toStringAsFixed(2)}",
+                          "Desconto: \$${discount.toStringAsFixed(2)}",
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.green,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          "Valor Final: \$${finalTotal.toStringAsFixed(2)}",
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,

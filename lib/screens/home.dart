@@ -8,7 +8,7 @@ import 'package:flutter/services.dart' show rootBundle;
 class Home extends StatefulWidget {
   /* Recuperando nome de usuario enviado da tela inicial */
   final String name;
-  Home({super.key, required this.name});
+  const Home({super.key, required this.name});
   @override
   State<Home> createState() => _HomeState();
 }
@@ -53,7 +53,6 @@ class _HomeState extends State<Home> {
                       Navigator.of(context).pop();
                       setState(() {
                         cart.add(item);
-                        print(cart);
                       });
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
@@ -140,7 +139,7 @@ class _HomeState extends State<Home> {
                       child: FittedBox(
                         fit: BoxFit.scaleDown,
                         child: Text(
-                          "BEM VINDO(A), ${widget.name}!",
+                          "BEM VINDO(A) ${widget.name}!",
                           style: TextStyle(
                             fontSize: 30,
                             fontWeight: FontWeight.bold,
@@ -299,7 +298,7 @@ class _HomeState extends State<Home> {
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.menu_book_outlined),
-            label: 'Card',
+            label: 'Cardápio',
           ),
           BottomNavigationBarItem(icon: Icon(Icons.fastfood), label: 'Pedidos'),
           BottomNavigationBarItem(
