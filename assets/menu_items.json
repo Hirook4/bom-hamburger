@@ -1,0 +1,58 @@
+[
+    {
+        "id": 0,
+        "name": "x-burger",
+        "type": "burger",
+        "price": 5.00,
+        "image": "xburger.png",
+        "description": "Pão, hamburguer 100g, queijo cheddar, tomate e molho secreto"
+    },
+    {
+        "id": 1,
+        "name": "x-egg",
+        "type": "burger",
+        "price": 4.50,
+        "image": "xegg.png",
+        "description": "Pão Gergelim, ovo, queijo cheddar, alface, tomate e molho especial"
+    },
+    {
+        "id": 2,
+        "name": "x-baccon",
+        "type": "burger",
+        "price": 7.00,
+        "image": "xbacon.png",
+        "description": "Pão Especial, hamburguer 80g, bacon, queijo cheddar, alface, tomate e molho secreto"
+    },
+    {
+        "id": 3,
+        "name": "fries",
+        "type": "extra",
+        "price": 2.00,
+        "image": "fries.png",
+        "description": "80g de Batata Crocante"
+    },
+    {
+        "id": 4,
+        "name": "soft drink",
+        "type": "drink",
+        "price": 2.50,
+        "image": "drink.png",
+        "description": "Bebida para acompanhar"
+    },
+    {
+        "id": 5,
+        "name": "coffee drink",
+        "type": "drink",
+        "price": 3.00,
+        "image": "coffee.png",
+        "description": "Apenas para preencher lista"
+    },
+    {
+        "id": 6,
+        "name": "coffee drink",
+        "type": "drink",
+        "price": 3.00,
+        "image": "coffee.png",
+        "description": "Apenas para preencher lista"
+    }
+]
