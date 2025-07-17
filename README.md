@@ -65,3 +65,4 @@ You are responsible for developing a mobile application (Android/iOS). The busin
 - feito o envio da lista cart para a tela Cart
 - tela do carrinho com a função de calcular descontos e limpar carrinho após confirmar pedido
 - tela de pedidos, recebendo a lista do carrinho e o nome do cliente
+- salvando localmente com shared preferences o nome e o pedido

@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:bom_hamburguer/_utils/color_theme.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Home extends StatefulWidget {
-  /* Recuperando nome de usuario enviado da tela inicial */
+  /* Recuperando nome de usuario recebido da tela de login*/
   final String name;
   const Home({super.key, required this.name});
   @override
@@ -14,7 +15,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  /* Carrega e converte os dados do JSON */
+  /* Carrega e converte os dados do JSON que contem os itens */
   Future<List<Map<String, dynamic>>> loadItems() async {
     final String manuItems = await rootBundle.loadString(
       'assets/menu_items.json',
@@ -106,7 +107,41 @@ class _HomeState extends State<Home> {
   }
 
   /* Inicializa lista de pedidos */
-  List<List<Map<String, dynamic>>> orders = [];
+  List<Map<String, dynamic>> orders = [];
+
+  /* Função para salvar pedidos localmente */
+  Future<void> saveOrders() async {
+    final prefs = await SharedPreferences.getInstance();
+    final ordersJson = jsonEncode(orders);
+    await prefs.setString('savedOrders', ordersJson);
+  }
+
+  /* Função para carregar lista de pedidos salva localmente */
+  Future<void> loadOrders() async {
+    final prefs = await SharedPreferences.getInstance();
+    final savedData = prefs.getString('savedOrders');
+
+    if (savedData != null) {
+      final decoded = jsonDecode(savedData);
+      setState(() {
+        orders = List<Map<String, dynamic>>.from(
+          decoded.map(
+            (order) => {
+              'name': order['name'],
+              'items': List<Map<String, dynamic>>.from(order['items']),
+            },
+          ),
+        );
+      });
+    }
+  }
+
+  /* Carrega pedidos */
+  @override
+  void initState() {
+    super.initState();
+    loadOrders();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -269,9 +304,13 @@ class _HomeState extends State<Home> {
                   .then((paymentDone) {
                     if (paymentDone == true) {
                       setState(() {
-                        orders.add(List<Map<String, dynamic>>.from(cart));
+                        orders.add({
+                          'name': widget.name,
+                          'items': List<Map<String, dynamic>>.from(cart),
+                        });
                         cart.clear();
                       });
+                      saveOrders();
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           backgroundColor: Colors.green,

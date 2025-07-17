@@ -2,7 +2,7 @@ import 'package:bom_hamburguer/_utils/color_theme.dart';
 import 'package:flutter/material.dart';
 
 class Orders extends StatelessWidget {
-  final List<List<Map<String, dynamic>>> orders;
+  final List<Map<String, dynamic>> orders;
   final String name;
 
   const Orders({super.key, required this.orders, required this.name});
@@ -58,21 +58,25 @@ class Orders extends StatelessWidget {
           : ListView.builder(
               itemCount: orders.length,
               itemBuilder: (context, index) {
-                final order = orders[index];
-                final total = calcValues(order);
-                final discount = calcDiscount(order);
+                final orderData = orders[index];
+                final orderName = orderData['name'];
+                final orderItems = List<Map<String, dynamic>>.from(
+                  orderData['items'],
+                );
+                final total = calcValues(orderItems);
+                final discount = calcDiscount(orderItems);
                 final finalTotal = total - discount;
 
                 return Card(
                   child: ListTile(
                     title: Text(
-                      "Pedido #${index + 1} - $name",
+                      "Pedido #${index + 1} - $orderName",
                       style: TextStyle(fontSize: 20),
                     ),
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        ...order.map((item) {
+                        ...orderItems.map((item) {
                           return Text(
                             "${item['name']} - \$${item['price'].toStringAsFixed(2)}",
                             style: TextStyle(fontSize: 16),
